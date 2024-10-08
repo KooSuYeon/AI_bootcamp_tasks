@@ -1,5 +1,8 @@
 # AI_bootcamp_tasks
 
+### RULE
+- PR 올린 후 merge
+
 ### First Week
 
 ---
