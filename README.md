@@ -5,7 +5,7 @@
 ---
 ### 1. 숫자 맞추기 게임 (guess_number_game.py)
 
-- [ ] 도전 과제 진행 여부
+- [x] 도전 과제 진행 여부
 
 <details>
 <summary>문제 설명</summary>
@@ -82,7 +82,7 @@
 ---
 ### 2. 클래스와 함수 사용하기 (use_class_and_function.py)
 
-- [ ] 도전 과제 진행 여부
+- [x] 도전 과제 진행 여부
 
 <details>
 <summary>문제 설명</summary>
@@ -161,7 +161,7 @@
 ---
 ### 3. Python 라이브러리로 데이터 분석하기 (data_analysis.py)
 
-- [ ] 도전 과제 진행 여부
+- [x] 도전 과제 진행 여부
 
 <details>
 <summary>문제 설명</summary>
