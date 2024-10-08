@@ -6,7 +6,6 @@ number = random.randrange(1, 11)
 print("1과 10 사이의 숫자를 하나 정했습니다.")
 print("이 숫자는 무엇일까요?")
 
-option = ""
 while True:
     guess = int(input("예상 숫자: "))
 
