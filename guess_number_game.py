@@ -7,11 +7,15 @@ print("1과 10 사이의 숫자를 하나 정했습니다.")
 print("이 숫자는 무엇일까요?")
 
 while True:
-    guess = int(input("예상 숫자: "))
 
-    if guess < 1 or guess > 10:
+    try:
+        guess = int(input("예상 숫자: "))
+    except:
         print("입력한 숫자는 1 ~ 10 사이의 숫자여야 합니다. 다시 입력하세요.")
         continue
+
+    if guess == number:
+        print("정답입니다!")
     elif guess > number:
         print("너무 큽니다. 다시 입력하세요.")
         continue
@@ -19,7 +23,8 @@ while True:
         print("너무 작습니다. 다시 입력하세요.")
         continue
     else:
-        print("정답입니다!")
+        print("입력한 숫자는 1 ~ 10 사이의 숫자여야 합니다. 다시 입력하세요.")
+        continue
 
     option = input("종료를 원한다면 z를 입력하고 재시작을 원한다면 r을 입력해주세요 >>> ")
     if option == "z":
