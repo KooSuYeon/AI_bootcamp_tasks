@@ -20,10 +20,15 @@ class Person:
         else:
             print(f"안녕하세요, {self.name}! 미성년자이시군요!")
 
+while True:
+    try:
+        age = int(input("나이: "))
+        name = input("이름: ")
+        gender = input("성별: ")    
+    except ValueError:
+        print("나이는 숫자로 입력해주세요!")
+        continue
 
-age = int(input("나이: "))
-name = input("이름: ")
-gender = input("성별: ")
-
-member = Person(name, gender, age)
-member.display()
+    member = Person(name, gender, age)
+    member.display()
+    break

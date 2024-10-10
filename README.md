@@ -2,6 +2,8 @@
 
 ### First Week
 
+코드 구현 사항 참고 PR : https://github.com/KooSuYeon/AI_bootcamp_tasks/pull/1
+
 ---
 ### 1. 숫자 맞추기 게임 (guess_number_game.py)
 
