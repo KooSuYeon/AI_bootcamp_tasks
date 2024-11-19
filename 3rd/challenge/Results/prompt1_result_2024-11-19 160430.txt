@@ -1,0 +1,2 @@
+Question: Open  Ko-LLM  Leaderboard에는 카카오가 참여하고 있어?
+Answer: 주어진 정보에서는 Open Ko-LLM Leaderboard에 카카오의 참여 여부에 대한 언급이 없습니다. 따라서 카카오가 참여하고 있는지에 대한 정보는 확인할 수 없습니다.

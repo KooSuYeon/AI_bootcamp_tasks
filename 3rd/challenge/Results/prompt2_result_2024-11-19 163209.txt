@@ -1,0 +1,9 @@
+Question & Answer: ```python
+[
+    {
+        "context": "16 특집원고  초거대 언어모델 연구 동향\nRetrieval Augmented Generation (RAG) [95, 96, 97, 98]이라 한다.\nOther Tools L a M D A  [ 4 4 ]는 대화 애플리케이션에 특화된 LLM으로, 검색 모듈, 계산기 및 번역기 등의 외부 도구 호출 기능을 가지고 있다. WebGPT [99] 는 웹 브라우저와의 상호작용을 통해 검색 쿼리에 사실 기반의 답변과 함께 출처 정보를 제공 한다. PAL [100]은 Python 인터프리터를 통한 복잡한 기호 추론 기능을 제공하며, 여러 관련 벤치마크에서 뛰어난 성능을 보여주었다. 다양한 종류의 API (e.g., 계산기, 달력, 검색, QA, 번역 등 단순한 API에서부터 Torch/ TensorFlow/HuggingFace Hub에 이르는 복잡한 API까지) 호출 기능을 갖춘 연구들 [101, 102, 103, 104, 105] 역시 존재한다. Microsoft는 최근 발표한 position paper [104] 에서 LLM과 같은 기반 모델을 뇌 (brain) 와 같은 중앙 통제 시스템으로 사용하여 다양한 API를 연동하는 방식으로 자사 AI 제품의 청사진을 제시하였다. 이외의 참고할만한 사례로는, 오픈소스 프로젝트인 LangChain18)과 상용 제품인 ChatGPT Plugin s19) 등이 있으며, 이들은 LLM을 기반으로 사용자가 원하는 외부 API와의 연동을 쉽게 할 수 있도록 설계되었다. 국내의 비슷한 사례로는 CLOV A X20)가 있으나, 아직까지는 내부 및 제휴사 API만 연동된 것으로 보인다. 이외에도, 단순 도구 사용을 넘어서서 LLM을 활용한 가상 에이전트 [106] 및 물리적 로봇 [107] 제어에 활용한 사례도 존재한다.",
+        "question": "What are some capabilities of LLMs mentioned in the context?",
+        "answer": "LLMs have capabilities such as external tool invocation for search, calculation, and translation, as well as complex symbolic reasoning through Python interpreters. They can also interact with web browsers to provide fact-based answers along with source information."
+    }
+]
+```

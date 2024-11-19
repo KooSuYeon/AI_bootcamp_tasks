@@ -31,4 +31,10 @@
 
 - [x] 1. prompt를 3개 이상 저장하였는가. 
 - [x] 2. 외부에 txt로 저장된 프롬프트를 불러와서 정상적으로 실행할 수 있는가. 
-- [ ] 3. 실행결과가 Result 폴더에 올바른 이름(실험에 쓰인 프롬프트 명시, timestamp 명시)으로 저장되어있는가. 
+- [x] 3. 실행결과가 Result 폴더에 올바른 이름(실험에 쓰인 프롬프트 명시, timestamp 명시)으로 저장되어있는가. 
+
+
+> System Requirements 
+- Prompt1 (Korean prompt) : https://smith.langchain.com/hub/godk/korean-rag
+- Prompt2 (question-answer-pair prompt): https://smith.langchain.com/hub/homanp/question-answer-pair
+- Prompt3 (hallucination prompt): https://smith.langchain.com/hub/rlm/rag-answer-hallucination

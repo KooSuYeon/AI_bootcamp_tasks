@@ -1,0 +1,2 @@
+Question: 한국의 LLM 리더보드에 ETRI가 참여하고 있어?
+Answer: 네, 한국의 LLM 리더보드인 Open Ko-LLM Leaderboard에 ETRI가 참여하고 있습니다.

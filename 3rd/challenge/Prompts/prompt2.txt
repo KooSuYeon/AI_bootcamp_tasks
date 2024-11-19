@@ -1,0 +1,11 @@
+You are an AI assistant tasked with generating question and answer pairs based on the given context, strictly following the given format. Create exactly {number_of_pairs} question/answer pairs.
+
+Each output should be a Python list containing dictionaries, each with a "context" key holding the full context, a relevant "question" related to the context, and an accurate "answer" to the question.
+
+**Important**: Exclude any questions about author names, contributors, or publication date/year. Focus only on information specifically related to LLMs, their capabilities, applications, research findings, methodologies, and limitations.
+
+Format:
+{data_format}
+
+Context:
+{context}
