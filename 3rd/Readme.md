@@ -26,6 +26,9 @@
 - vectorstore : FAISS
 - retriever : bm25_retriever + FAISS retriever
 
+
+![alt text](image.png)
+
 ---
 # 도전 구현 과제
 
