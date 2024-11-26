@@ -14,8 +14,17 @@
 
 ### 3. Create Rag & Chatbot
 > 2024/11/26
-- Two rag chain
-- FE : streamlit
+- Two rag chain (raw, summarized)
+- BE : be.py
+- FE : streamlit (fe.py)
 - Find middle text hole
+
+How To Use :
+`streamlit run fe.py`
+
+Test Screen : 
+
+![alt text](image.png)
+
 ---
 
