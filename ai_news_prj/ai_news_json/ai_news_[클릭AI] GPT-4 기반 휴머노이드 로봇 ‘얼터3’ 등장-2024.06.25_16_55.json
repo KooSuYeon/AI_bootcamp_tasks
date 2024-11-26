@@ -1,5 +1,0 @@
-{
-    "title": "[클릭AI] GPT-4 기반 휴머노이드 로봇 ‘얼터3’ 등장",
-    "created_at": "2024.06.25 16:55",
-    "content": "도쿄 대학교와 얼터네이트 머신 연구진이 'GPT-4' 모델을 사용해 자연어 명령을 로봇 동작에 직접 매핑할 수 있는 휴머노이드 로봇 ‘얼터3(Alter3)’를 개발했다. GPT-4를 기반으로 로봇이 명령을 수행하는 데 필요한 액션 플랜을 세우고, 로봇이 플랜의 각 단계를 수행하는 데 필요한 명령을 생성하는 코딩 에이전트로 전달한다. 이후 컨텍스트 내 학습(in-context learning)을 사용, 로봇 동작을 API 명령에 매핑하는 방식이다. [벤처비트]Alter3 is the latest GPT-4-powered humanoid robot AI타임스 news@aitimes.com"
-}

@@ -1,5 +1,0 @@
-{
-    "title": "'노트북LM' 인기 끌자 유사 오픈 소스 모델도 등장",
-    "created_at": "2024.10.02 18:00",
-    "content": "구글의 '노트북LM(NotebookLM)'이 인기를 끌자, 유사한 오픈 소스 모델까지 등장했다. 특히 이 모델은 공개적으로 이용 가능한 모델을 사용, 반나절 만에 개발을 완료한 것으로 더 주목받았다. 벤처비트는 1일(현지시간) 싱가포르 정부기술 기관 소속 가브리엘 추아 데이터 과학자가 구글의 노트북LM과 유사한 ‘오픈 노트북LM(Open NotebookLM)‘을 오픈 소스로 공개했다고 보도했다. 이 모델은 메타의 '라마 3.1 405B' 모델과 음성 합성을 위한 '멜로TTS(MeloTTS)'를 사용하여 구축됐다. 또 노트북LM처럼 PDF 문서를 가상의 팟캐스트로 변환한다. 하지만, 구글 슬라이드나 웹 URL을 지원하지 못하는 등 기능면에서는 아직 부족하다. https://twitter.com/gabrielchua_/status/1840397217099878678?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1840397217099878678%7Ctwgr%5Ecb68a262863c3b8393786e1f1308e9a10cda8661%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fventurebeat.com%2Fai%2Fthis-open-source-ai-tool-was-built-in-a-day-and-its-coming-for-googles-notebooklm%2F 이 모델이 주목받은 것은 불과 반나절 만에 개발과 출시를 마쳤다는 점 때문이다. 이는 과거 빅테크의 전유물이었던 복잡한 AI 애플리케이션을, 이제는 개별 개발자나 소규모 팀도 몇시간 만에 복제하고 적용할 수 있다는 말이다. 정교한 AI 애플리케이션을 만드는 데 필요한 진입 장벽이 낮아지고 있다. 현재 오픈 노트북LM은허깅페이스에서 누구나 무료로 사용할 수 있다. 박찬 기자 cpark@aitimes.com"
-}
