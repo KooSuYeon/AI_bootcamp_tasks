@@ -3,12 +3,39 @@ from dotenv import load_dotenv
 import streamlit as st
 import be
 
-# 환경 변수 로드
-load_dotenv()
-api_key = os.getenv("OPEN_API_KEY")
+# Streamlit 기본 설정
+st.markdown(
+    """
+    <h1 style="text-align: center;">🤖 AI 정보 확장 챗봇 🤖</h1>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown("--- ")
 
 # Streamlit 기본 설정
-st.header("🤖 AI 뉴스 summerized VS raw 비교 챗봇 🤖")
+st.markdown(
+    """
+    <h3>📈 Trend </h3>
+    """,
+    unsafe_allow_html=True
+)
+recent_docs = be.get_recent_docs()
+
+# Adjust column widths by specifying the relative weights
+col1, col2, col3= st.columns([2, 2, 2])  # 5 columns with equal width distribution
+card_height = 300
+
+# Loop through the recent_docs to populate each column with a card
+for idx, doc in enumerate(recent_docs[:3]):  # Limit to the first 5 documents
+    col_idx = idx % 5
+    
+    # Create containers in a loop for each document
+    with eval(f'col{col_idx + 1}'):
+        container = st.container(height=card_height)
+        container.markdown(f"{doc['title']}")
+        container.markdown(f"**{doc['other']}**")
+        container.markdown(f"**Link:** {doc['url']}")
 
 # 채팅 히스토리 초기화
 if "messages" not in st.session_state:
@@ -33,15 +60,27 @@ if user_input := st.chat_input("질문을 입력하세요! 종료하려면 'exit
         # RAG 모델 호출
         with st.chat_message("assistant"):
             try:
-                response_sum = be.summerized_rag_chain_debug.invoke(user_input)
-                response_sum_content = response_sum.content  # 응답 내용을 가져옵니다.
-                response_raw = be.raw_rag_chain_debug.invoke(user_input)
-                response_raw_content = response_raw.content  # 응답 내용을 가져옵니다.
-                st.markdown(f"summerized : {response_sum_content}")
-                st.markdown(f"\nraw : {response_raw_content}")
+                extract = be.extract_assistant(user_input)
+                media = extract.get("action")
+                keyword = extract.get("search_keyword")
 
-                # 어시스턴트 메시지를 히스토리에 추가
-                st.session_state.messages.append({"role": "assistant", "content": response_sum_content})
-                st.session_state.messages.append({"role": "assistant", "content": response_raw_content})
+                st.subheader(f"🔍 {media} 매체로 원하시는 정보를 보여줄게요 ...")
+                st.session_state.messages.append({"role": "assistant", "content":f"🔍 {media} 매체로 원하시는 정보를 보여줄게요 ..."})
+                st.markdown(f"--- ")
+                if media == "video":
+                    results = be.search_youtube_videos(keyword)
+                    assistant = be.print_videos_information(results)
+                    st.markdown(assistant)
+                    
+
+                elif media == "news":
+                    results = be.queryDB(keyword)
+                    assistant = be.print_news_information(results)
+                    st.markdown(assistant)
+                else:
+                    print("UNSUPPORTED ACCESS")
+
+                st.session_state.messages.append({"role": "assistant", "content":assistant})
+
             except Exception as e:
                 st.error(f"RAG 호출 중 오류가 발생했습니다: {str(e)}")

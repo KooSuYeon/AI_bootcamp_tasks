@@ -1,5 +1,8 @@
 ## 📋 Introduction
 - 사용자의 AI 관련 질문을 관련 뉴스나 Youtube 영상 제공으로 정보의 확장을 도와주는 Chatbot
+
+![alt text](image/running.gif)
+
 ---
 ## 📣 How To Use
 
@@ -13,6 +16,9 @@ pip install -r requirements.txt
 3. Docker 이미지를 pull하고 pull 한 이미지를 바탕으로 생성된 container를 실행
 docker pull chromadb/chroma
 docker run -p 9000:8000 chromadb/chrom
+
+4. 로컬 구동
+streamlit run fe.py
 
 ```
 
@@ -38,7 +44,7 @@ docker run -p 9000:8000 chromadb/chrom
 - [X] 임베딩돤 뉴스 데이터 vetorDB 저장을 위한 Chroma Docker 도입
 - [X] 사용자의 입력값에 따른 매체 선택 분류 기능 적용
 - [X] Youtube API에 Agent를 도입해 관련 영상 가져오는 기능 도입
-- [ ] Streamlit 2차 연결
+- [X] Streamlit 2차 연결
 
 ---
 ## 🎢 Timeline
@@ -69,7 +75,7 @@ How To Use :
 
 Test Screen : 
 
-![alt text](image.png)
+![alt text](image/image.png)
 
 
 ### 4. Create Youtube Agent
@@ -82,7 +88,7 @@ How To Use :
 
 Test Screen :
 
-![alt text](agent_1.png)
+![alt text](image/agent_1.png)
 
 ---
 
