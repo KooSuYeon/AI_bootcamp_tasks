@@ -64,23 +64,26 @@ if user_input := st.chat_input("질문을 입력하세요! 종료하려면 'exit
                 media = extract.get("action")
                 keyword = extract.get("search_keyword")
 
-                st.subheader(f"🔍 {media} 매체로 원하시는 정보를 보여줄게요 ...")
-                st.session_state.messages.append({"role": "assistant", "content":f"🔍 {media} 매체로 원하시는 정보를 보여줄게요 ..."})
-                st.markdown(f"--- ")
                 if media == "video":
+                    st.subheader(f"🔍 {media} 매체로 원하시는 정보를 보여줄게요 ...")
+                    st.session_state.messages.append({"role": "assistant", "content":f"🔍 {media} 매체로 원하시는 정보를 보여줄게요 ..."})
+                    st.markdown(f"--- ")
                     results = be.search_youtube_videos(keyword)
                     assistant = be.print_videos_information(results)
                     st.markdown(assistant)
-                    
-
+                    st.session_state.messages.append({"role": "assistant", "content":assistant})
                 elif media == "news":
+                    st.subheader(f"🔍 {media} 매체로 원하시는 정보를 보여줄게요 ...")
+                    st.session_state.messages.append({"role": "assistant", "content":f"🔍 {media} 매체로 원하시는 정보를 보여줄게요 ..."})
+                    st.markdown(f"--- ")
                     results = be.queryDB(keyword)
                     assistant = be.print_news_information(results)
                     st.markdown(assistant)
+                    st.session_state.messages.append({"role": "assistant", "content":assistant})
                 else:
-                    print("UNSUPPORTED ACCESS")
-
-                st.session_state.messages.append({"role": "assistant", "content":assistant})
+                    error_message = "😅 본 서비스는 AI 관련 질의만 가능하세요... 🙏"
+                    st.subheader(error_message)
+                    st.session_state.messages.append({"role": "assistant", "content":error_message})
 
             except Exception as e:
                 st.error(f"RAG 호출 중 오류가 발생했습니다: {str(e)}")
