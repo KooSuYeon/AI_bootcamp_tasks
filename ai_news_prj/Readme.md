@@ -3,6 +3,9 @@
 
 ![alt text](image/running.gif)
 
+## Software Architecture
+![alt text](image/architecture.png)
+
 ---
 ## 📣 How To Use
 
@@ -45,6 +48,7 @@ streamlit run fe.py
 - [X] 사용자의 입력값에 따른 매체 선택 분류 기능 적용
 - [X] Youtube API에 Agent를 도입해 관련 영상 가져오는 기능 도입
 - [X] Streamlit 2차 연결
+- [X] SA 작성
 
 ---
 ## 🎢 Timeline
