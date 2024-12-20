@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="shop_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>
+        Latest Products
+      </h2>
+    </div>
+    <div class="row">
+      {% for product in products %}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="box">
+            <a href="{% url 'products:detail' product.id %}">
+
+                {% if product.image %}
+                  <div class="img-box">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                  </div>
+                {% endif %}
+                
+              <div class="detail-box">
+                <h6>{{ product.name }}</h6>
+                <h6>Price <span>${{ product.price }}</span></h6>
+              </div>
+              {% if product.type == 'new' %}
+                <div class="new">
+                  <span>New</span>
+                </div>
+              {% endif %}
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="btn-box">
+      <a href="{% url 'products:create' %}">
+        View All Products
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
+
+   

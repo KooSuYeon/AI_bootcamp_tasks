@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="followings-section">
+    <div class="container mt-5">
+        
+        {% if request.user.is_authenticated %}
+            <div class="tabs">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="openTab(event, 'not_following')"> NOT FOLLOWING </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="openTab(event, 'following')"> FOLLOWING </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="not_following" class="tabcontent active mt-3">
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-6 d-flex flex-column align-items-center">
+                        <h4> NOT FOLLOWING </h4>
+                        <hr>
+                        {% for user in users %}
+                            {% if user.id != request.user.id and user.id not in followings %}
+                                <div class="card shadow mb-4 w-75">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">
+                                            <a href="{% url 'users:profile' user.id %}">
+                                                {{ user.username }}
+                                            </a>
+                                        </h5>
+                                        <p class="card-text">
+                                            <strong>Nickname:</strong> {{ user.nickname|default:"N/A" }}
+                                        </p>
+                                        <p class="card-text">
+                                            <strong>Location:</strong> {{ user.location|default:"N/A" }}
+                                        </p>
+                                        <p class="card-text">
+                                            <small>
+                                                <strong>Joined:</strong> {{ user.created_at|date:"M d, Y" }}
+                                            </small>
+                                        </p>
+                                        <p class="card-text">
+                                            <small>
+                                                <strong>Last Updated:</strong> {{ user.modified_at|date:"M d, Y" }}
+                                            </small>
+                                        </p>
+                                        <div class="d-grid gap-2">
+                                            <form action="{% url 'users:follow' user.id %}" method="POST">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-primary w-50 mx-auto">팔로우</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div id="following" class="tabcontent mt-3">
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-6 d-flex flex-column align-items-center">
+                        <h4> FOLLOWING </h4>
+                        <hr>
+                        {% for user in users %}
+                            {% if user.id != request.user.id and user.id in followings %}
+                                <div class="card shadow mb-4 w-75">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">
+                                            <a href="{% url 'users:profile' user.id %}">
+                                                {{ user.username }}
+                                            </a>
+                                        </h5>
+                                        <p class="card-text">
+                                            <strong>Nickname:</strong> {{ user.nickname|default:"N/A" }}
+                                        </p>
+                                        <p class="card-text">
+                                            <strong>Location:</strong> {{ user.location|default:"N/A" }}
+                                        </p>
+                                        <p class="card-text">
+                                            <small>
+                                                <strong>Joined:</strong> {{ user.created_at|date:"M d, Y" }}
+                                            </small>
+                                        </p>
+                                        <p class="card-text">
+                                            <small>
+                                                <strong>Last Updated:</strong> {{ user.modified_at|date:"M d, Y" }}
+                                            </small>
+                                        </p>
+                                        <div class="d-grid gap-2">
+                                            <form action="{% url 'users:follow' user.id %}" method="POST">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger w-50 mx-auto">언팔로우</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        {% else %}
+            <p class="text-center">로그인이 필요합니다.</p>
+        {% endif %}
+    </div>
+</section>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        tablinks = document.getElementsByClassName("nav-link");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.classList.add("active");
+    }
+
+    // Open the default tab (NOT FOLLOWING) when the page loads
+    document.getElementById("not_following").style.display = "block";
+</script>
+{% endblock content %}
+

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="product_detail_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>{{ product.name }}</h2>
+      <div class="divider"></div>
+      {% if user.is_authenticated and user == product.author %}
+        <div class="action-bar mt-3 mb-4">
+          {% comment %} <a href="{% url 'products:update' product.id %}" class="btn btn-warning me-2">Edit</a> {% endcomment %}
+          <form action="{% url 'products:delete' product.id %}" method="POST" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      {% endif %}
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        {% if product.image %}
+            <div class="img-box">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+            </div>
+        {% endif %}
+      </div>
+      <div class="col-md-6">
+        <div class="detail-box">
+          <h4>Description</h4>
+          <p>{{ product.description }}</p>
+          <h4>Category</h4>
+          <p>{{ product.get_type_display }}</p>
+          <h4>Price</h4>
+          <p>${{ product.price }}</p>
+          {% if product.type == 'new' %}
+            <div class="badge new-badge">
+              <span>New</span>
+            </div>
+          {% endif %}
+          <a href="#" class="btn btn-primary mt-3">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    <div class="back-link mt-5">
+      <a href="{% url 'products:products' %}" class="btn btn-secondary">Back to Products</a>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <form action="{% url 'products:create' %}" method="POST" enctype="multipart/form-data" class="border p-4 rounded bg-white shadow-sm">
+                {% csrf_token %}
+                
+                <!-- Product Name -->
+                <div class="form-group mb-3">
+                    <label for="id_name" class="form-label">Name:</label>
+                    {{ form.name }}
+                </div>
+
+                <!-- Description -->
+                <div class="form-group mb-3">
+                    <label for="id_description" class="form-label">Description:</label>
+                    {{ form.description }}
+                </div>
+
+                <!-- Category -->
+                <div class="form-group mb-3">
+                    <label for="id_type" class="form-label">Category:</label>
+                    {{ form.type }}
+                    <small class="form-text text-muted">Choose a category that best fits the product.</small>
+                </div>
+
+                <!-- Price -->
+                <div class="form-group mb-3">
+                    <label for="id_price" class="form-label">Price (in thousand units):</label>
+                    {{ form.price }}
+                    <small class="form-text text-muted">Enter price in thousands without any decimals.</small>
+                </div>
+
+                <!-- Image -->
+                <div class="form-group mb-3">
+                    <label for="id_product_image" class="form-label">Product Image:</label>
+                    {{ form.image }}
+                </div>
+
+                <hr class="my-4">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Create Product</button>
+            </form>
+            <br><br>
+            <a href="{% url 'products:products' %}" class="btn btn-outline-secondary btn-lg btn-block">Back to Products</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

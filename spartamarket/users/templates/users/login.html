@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="contact_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>LOGIN</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="form_container">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        <div class="form-group">
+                            <label for="username">ID</label>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                            <div class="text-danger">
+                                {{ form.username.errors.0 }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">PASSWORD</label>
+                            {{ form.password }}
+                            {% if form.password.errors %}
+                            <div class="text-danger">
+                                {{ form.password.errors.0 }}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="btn_box">
+                            <button type="submit" class="btn btn-primary">
+                                LOGIN
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
