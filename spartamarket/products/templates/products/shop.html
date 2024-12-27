@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load humanize %}
 {% block content %}
 
 <section class="shop_section layout_padding">
@@ -18,18 +19,20 @@
                 {% if product.image %}
                   <div class="img-box">
                     <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                  </div>
+                </div>
                 {% endif %}
                 
               <div class="detail-box">
                 <h6>{{ product.name }}</h6>
-                <h6>Price <span>${{ product.price }}</span></h6>
               </div>
-              {% if product.type == 'new' %}
-                <div class="new">
-                  <span>New</span>
-                </div>
-              {% endif %}
+
+              <div class="detail-box">
+                <h6>Type <span>{{ product.type }}</span></h6>
+              </div>
+
+              <div class="detail-box">
+                <h6>Price <span>₩{{ product.price| intcomma }}</span></h6>
+              </div>
             </a>
           </div>
         </div>

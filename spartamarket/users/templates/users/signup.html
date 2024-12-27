@@ -20,11 +20,14 @@
                             {% if field.help_text %}
                             <small class="form-text text-muted">{{ field.help_text }}</small>
                             {% endif %}
-                            {% for error in field.errors %}
-                            <small class="text-danger">{{ error }}</small>
-                            {% endfor %}
                         </div>
                         {% endfor %}
+
+                        {% if errors %}
+                        
+                        <small class="text-danger">{{ errors }}</small>
+                        
+                        {% endif %}
                         <div class="btn_box">
                             <button type="submit" class="btn btn-primary">
                                 SIGNUP

@@ -10,9 +10,11 @@
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <div class="form_container">
+                    <!-- Form 시작 -->
                     <form action="" method="POST">
                         {% csrf_token %}
-
+                        
+                        <!-- 전체 폼 에러 -->
                         {% if form.non_field_errors %}
                         <div class="alert alert-danger">
                             <ul>
@@ -23,9 +25,17 @@
                         </div>
                         {% endif %}
 
+                        <!-- Username 필드 -->
                         <div class="form-group">
-                            <label for="username">ID</label>
-                            {{ form.username }}
+                            <label for="id_username">ID</label>
+                            <!-- 사용자 정의 input으로 form 필드 렌더링 -->
+                            <input type="text" 
+                                   name="username" 
+                                   id="id_username" 
+                                   class="form-control" 
+                                   placeholder="Enter your ID"
+                                   value="{{ form.username.value|default:'' }}" 
+                                   required />
                             {% if form.username.errors %}
                             <div class="text-danger">
                                 {{ form.username.errors.0 }}
@@ -33,26 +43,34 @@
                             {% endif %}
                         </div>
                         
+                        <!-- Password 필드 -->
                         <div class="form-group">
-                            <label for="password">PASSWORD</label>
-                            {{ form.password }}
+                            <label for="id_password">PASSWORD</label>
+                            <input type="password" 
+                                   name="password" 
+                                   id="id_password" 
+                                   class="form-control" 
+                                   placeholder="Enter your password" 
+                                   required />
                             {% if form.password.errors %}
                             <div class="text-danger">
                                 {{ form.password.errors.0 }}
                             </div>
                             {% endif %}
                         </div>
+                        
 
+                        <!-- Submit 버튼 -->
                         <div class="btn_box">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary w-100">
                                 LOGIN
                             </button>
                         </div>
                     </form>
+                    <!-- Form 종료 -->
                 </div>
             </div>
         </div>
     </div>
 </section>
 {% endblock content %}
-

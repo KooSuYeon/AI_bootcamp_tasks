@@ -7,6 +7,14 @@ class CustomUserCreateForm(UserCreationForm):
         model = get_user_model()
         fields = UserCreationForm.Meta.fields + ()
 
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        # 비밀번호 해싱
+        user.set_password(self.cleaned_data["password1"])
+        if commit:
+            user.save()
+        return user
+
 class CustomUserUpdateForm(UserChangeForm):
     class Meta:
         model = get_user_model() 

@@ -12,10 +12,12 @@ class Product(models.Model):
         ('other', 'Other'),
     ]
 
-    name = models.CharField(max_length=130, blank=True, null=True)
+    name = models.CharField(max_length=130)
     description = models.TextField()
-    type = models.CharField(max_length=30, choices=CATEGORY_CHOICES, blank=True, null=True, help_text="Category of the product")
-    price = models.PositiveIntegerField(blank=True, null=True, help_text="Price of the product in thousand units (no decimals)")
+    type = models.CharField(max_length=30, choices=CATEGORY_CHOICES, default="idea", help_text="Category of the product")
+    price = models.CharField(max_length=10,
+    help_text="Price of the product in thousand units (no decimals)",
+    default=0)  # 기본값을 0으로 설정
     image = models.ImageField(upload_to="products/", blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)

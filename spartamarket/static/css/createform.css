@@ -1,0 +1,97 @@
+:root {
+  --primary-color: #F06A6A; /* Lighter red */
+  --secondary-color: #81898F;
+  --tertiary-color: #fff; /* White-ish color */
+}
+
+.createform-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, var(--tertiary-color) 0%, var(--tertiary-color) 70%, var(--primary-color) 120%);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* color: var(--secondary-color);  */
+}
+
+
+
+/* Form field labels */
+.createform-container .form-label {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Input fields styling */
+.createform-container input,
+.createform-container textarea,
+.createform-container select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.createform-container input:focus,
+.createform-container textarea:focus,
+.createform-container select:focus {
+  border-color: #ff0000;
+  outline: none;
+}
+
+/* Button styles */
+.createform-container .btn {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.createform-container .btn-primary {
+  background-color: #ff0000;
+  border-color: #ff0000;
+  color: white;
+}
+
+.createform-container .btn-primary:hover {
+  background-color: #ff0000;
+  border-color: #ff0000;
+}
+
+.createform-container .btn-outline-secondary {
+  color: #ff0000;
+  border-color: #6c757d;
+  max-width: 700px;
+}
+
+.createform-container .btn-outline-secondary:hover {
+  color: #ff0000;
+  background-color: #f8f9fa;
+}
+
+/* Form helper text */
+.createform-container .form-text {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* Horizontal rule */
+.createform-container hr {
+  border-color: #ddd;
+  margin: 20px 0;
+}
+
+
+.custom-button:hover {
+  background-color: #b02a23; /* 버튼 호버 시 색상 */
+  transform: translateY(-2px); /* 약간 올라가는 효과 */
+}
+
+.custom-button:active {
+  transform: translateY(0); /* 클릭 시 원래 위치 */
+  background-color: #8a1c19; /* 클릭 시 색상 */
+}

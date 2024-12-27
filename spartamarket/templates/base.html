@@ -20,6 +20,8 @@
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
         <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/createform.css' %}">
+        {% block header %}{% endblock header %}
       </head>
 <body>
 
@@ -50,15 +52,19 @@
                       FOLLOWING
                     </a>
                   </li>
-                  {% if request.user.is_authenticated %}
-                  
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url "users:profile" request.user.id %}">
-                      MY PAGE
-                    </a>
-                  </li>
-
+                  {% if request.COOKIES.access %}
+                      {% with request.COOKIES.access as access_token %}
+                        {% if access_token %}
+                          {% comment %} JWT 토큰이 존재하면 인증된 상태로 간주 {% endcomment %}
+                          <li class="nav-item">
+                            <a class="nav-link" href="{% url 'users:profile' user_id %}">
+                              MY PAGE
+                            </a>
+                          </li>
+                        {% endif %}
+                      {% endwith %}
                   {% endif %}
+
                   
                   <li class="nav-item">
                     <a class="nav-link" href="contact.html">Contact Us</a>
@@ -66,20 +72,44 @@
                 </ul>
                 <div class="user_option">
                   
-                  {% if request.user.is_authenticated %}
-                  
-                    <form action="{% url 'users:logout' %}" method="POST">
-                        {% csrf_token %}
-                        
-                        <button class="btn btn-link text-dark">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            <span>
-                            Logout
-                            </span>
+                  {% if request.COOKIES.access %}
+                  {% with request.COOKIES.access as access_token %}
+                    {% if access_token %}
+                      <li class="nav-item">
+                        <form id="logout-form" action="{% url 'users:login' %}" method="POST" style="display: none;">
+                          {% csrf_token %}
+                        </form>
+                
+                        <button class="btn btn-link text-dark" onclick="logout();">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                          <span>Logout</span>
                         </button>
-                        
-                    </form>
-                    
+                      </li>
+                
+                      <script>
+                        function logout() {
+                          // fetch API로 DELETE 요청 보내기
+                          fetch("{% url 'users:login' %}", {
+                            method: "DELETE",
+                            headers: {
+                              "X-CSRFToken": document.querySelector('[name="csrfmiddlewaretoken"]').value
+                            }
+                          })
+                          .then(response => {
+                            if (response.ok) {
+                              window.location.href = "{% url 'users:login' %}";  // 로그아웃 후 리디렉션
+                            } else {
+                              alert("로그아웃 실패");
+                            }
+                          })
+                          .catch(error => {
+                            console.error("Error:", error);
+                            alert("로그아웃 중 오류가 발생했습니다.");
+                          });
+                        }
+                      </script>
+                    {% endif %}
+                  {% endwith %}
                   
                   {% else %}
 

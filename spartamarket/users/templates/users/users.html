@@ -19,7 +19,7 @@
             <div id="not_following" class="tabcontent active mt-3">
                 <div class="d-flex justify-content-center">
                     <div class="col-md-6 d-flex flex-column align-items-center">
-                        <h4> NOT FOLLOWING </h4>
+                        <h4> NOT FOLLOWING {{ not_followings | length }} </h4>
                         <hr>
                         {% for user in users %}
                             {% if user.id != request.user.id and user.id not in followings %}
