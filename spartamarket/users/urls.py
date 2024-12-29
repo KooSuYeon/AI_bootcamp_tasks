@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import UserSignupView, UserLoginView, UserProfileView
+from .views import UserSignupView, UserLoginView, UserProfileView, FollowListView, FollowCreateView, OtherProfileView, UserUpdateView, UserDeleteView
 from . import views
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -9,15 +9,15 @@ from rest_framework_simplejwt.views import (
 app_name = "users"
 urlpatterns = [
 
-    path("", views.users, name="users"),
+   
     path("signup/", UserSignupView.as_view(), name="signup"),
     path("login/", UserLoginView.as_view(), name="login"),
-    # path('', views.getRoutes),
-    path('profile/<int:user_id>/', UserProfileView.as_view(), name='profile'),
-    path("<int:user_id>/update", views.update, name="update"),
+    path('profile/', UserProfileView.as_view(), name='profile'),
+    path('update/profile/', UserUpdateView.as_view(), name='update'),
+    path('<int:user_id>/profile/', OtherProfileView.as_view(), name='other_profile'),
     # path('password/', views.change_password, name="change_password"),
     # path("<int:user_id>/delete/", views.delete, name="delete"),
-    # path("<int:user_id>/follow/", views.follow, name="follow"),
-    # path("<int:user_id>/followings/", views.followings, name="followings"),
-    # path("<int:user_id>/followers/", views.followers, name="followers"),
+    path("", FollowListView.as_view(), name="users"),
+    path("<int:user_id>/follow/",FollowCreateView.as_view(), name="follow"),
+     path("<int:user_id>/delete/",UserDeleteView.as_view(), name="delete"),
 ]

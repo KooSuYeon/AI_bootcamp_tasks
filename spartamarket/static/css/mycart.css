@@ -1,0 +1,60 @@
+/* General container padding */
+.container {
+    padding: 20px;
+}
+
+/* Product Card Styling */
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* On hover, the card pops out slightly */
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Product Image Styling */
+.product-img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Card Body */
+.card-body h5 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-body p {
+    margin-bottom: 10px;
+    color: #666;
+}
+
+/* Card Footer Styling */
+.card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+    border-radius: 0 0 8px 8px;
+    padding: 10px 15px;
+}
+
+.card-footer a.btn-primary {
+    font-size: 0.875rem;
+    padding: 8px 12px;
+}
+
+.card-footer button.btn-danger {
+    font-size: 0.875rem;
+    padding: 8px 12px;
+}
+
+/* Empty Cart Text */
+.text-center {
+    color: #777;
+}

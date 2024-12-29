@@ -3,8 +3,7 @@
 {% block content %}
 <section class="followings-section">
     <div class="container mt-5">
-        
-        {% if request.user.is_authenticated %}
+
             <div class="tabs">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -21,12 +20,11 @@
                     <div class="col-md-6 d-flex flex-column align-items-center">
                         <h4> NOT FOLLOWING {{ not_followings | length }} </h4>
                         <hr>
-                        {% for user in users %}
-                            {% if user.id != request.user.id and user.id not in followings %}
+                        {% for user in not_followings %}
                                 <div class="card shadow mb-4 w-75">
                                     <div class="card-body text-center">
                                         <h5 class="card-title">
-                                            <a href="{% url 'users:profile' user.id %}">
+                                            <a href="{% url 'users:other_profile' user_id=user.id %}">
                                                 {{ user.username }}
                                             </a>
                                         </h5>
@@ -47,14 +45,13 @@
                                             </small>
                                         </p>
                                         <div class="d-grid gap-2">
-                                            <form action="{% url 'users:follow' user.id %}" method="POST">
+                                            <form action="{% url 'users:follow' user_id=user.id %}" method="POST">
                                                 {% csrf_token %}
                                                 <button type="submit" class="btn btn-primary w-50 mx-auto">팔로우</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -65,12 +62,12 @@
                     <div class="col-md-6 d-flex flex-column align-items-center">
                         <h4> FOLLOWING </h4>
                         <hr>
-                        {% for user in users %}
-                            {% if user.id != request.user.id and user.id in followings %}
+                        {% for user in followings %}
+                            {% if user.id != me.id %}
                                 <div class="card shadow mb-4 w-75">
                                     <div class="card-body text-center">
                                         <h5 class="card-title">
-                                            <a href="{% url 'users:profile' user.id %}">
+                                            <a href="{% url 'users:other_profile' user_id=user.id %}">
                                                 {{ user.username }}
                                             </a>
                                         </h5>
@@ -91,7 +88,7 @@
                                             </small>
                                         </p>
                                         <div class="d-grid gap-2">
-                                            <form action="{% url 'users:follow' user.id %}" method="POST">
+                                            <form action="{% url 'users:follow' user_id=user.id %}" method="POST">
                                                 {% csrf_token %}
                                                 <button type="submit" class="btn btn-danger w-50 mx-auto">언팔로우</button>
                                             </form>
@@ -103,10 +100,6 @@
                     </div>
                 </div>
             </div>
-
-        {% else %}
-            <p class="text-center">로그인이 필요합니다.</p>
-        {% endif %}
     </div>
 </section>
 

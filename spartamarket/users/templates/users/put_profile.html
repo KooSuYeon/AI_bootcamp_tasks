@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+<link rel="stylesheet" href="{% static 'css/createform.css' %}">
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+
+            <!-- Back Button -->
+            <a href="{% url 'users:profile' %}">
+                <i class="fa-sharp fa-solid fa-arrow-left"></i>
+                Back to Profile
+            </a>
+
+            <br><br>
+
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-danger text-white">
+                    <h4 class="mb-0">Update Your Profile</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'users:update' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="_method" value="PUT"> <!-- PUT method for update -->
+                        
+                        <!-- Nickname -->
+                        <div class="form-group mb-4">
+                            <label for="id_nickname" class="form-label">Nickname:</label>
+                            <input type="text" name="nickname" id="id_nickname" class="form-control" 
+                                   value="{{ user.nickname }}">
+                            {% if form.nickname.errors %}
+                                <div class="text-danger mt-2">
+                                    {% for error in form.nickname.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group mb-4">
+                            <label for="id_email" class="form-label">Email:</label>
+                            <input type="email" name="email" id="id_email" class="form-control" 
+                                   value="{{ user.email }}">
+                            {% if form.email.errors %}
+                                <div class="text-danger mt-2">
+                                    {% for error in form.email.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Location -->
+                        <div class="form-group mb-4">
+                            <label for="id_location" class="form-label">Location:</label>
+                            <input type="text" name="location" id="id_location" class="form-control" 
+                                   value="{{ user.location }}">
+                            {% if form.location.errors %}
+                                <div class="text-danger mt-2">
+                                    {% for error in form.location.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Profile Image (optional) -->
+                        <div class="form-group mb-4">
+                            <label for="id_profile_image" class="form-label">Profile Image (Optional):</label>
+                            <input type="file" name="profile_image" id="id_profile_image" class="form-control">
+                            {% if form.profile_image.errors %}
+                                <div class="text-danger mt-2">
+                                    {% for error in form.profile_image.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <hr>
+                        <!-- Submit Button -->
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-danger btn-lg px-5">
+                                <i class="fa-solid fa-save fa-lg me-2"></i> Update Profile
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -15,6 +15,7 @@ class User(AbstractUser):
     location = models.CharField(max_length=255, blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    image = models.ImageField('프로필 이미지', upload_to='users/', blank=True, null=True)
 
 class Follow(models.Model):
 

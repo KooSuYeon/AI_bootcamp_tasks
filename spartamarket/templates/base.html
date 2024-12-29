@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+      
         <!-- Basic -->
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,138 +13,126 @@
         <meta name="author" content="" />
         <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
       
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
         <title>
           Sparta Market
         </title>
         
+       
+
         {% load static %}
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
         <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/createform.css' %}">
+        <link rel="stylesheet" href="{% static 'css/detailform.css' %}">
+        <link rel="stylesheet" href="{% static 'css/mycart.css' %}">
+        <link rel="stylesheet" href="{% static 'css/shop.css' %}">
+
+        
         {% block header %}{% endblock header %}
       </head>
 <body>
 
-    <div>
-        <header class="header_section">
-            <nav class="navbar navbar-expand-lg custom_nav-container ">
-              <a class="navbar-brand" href="index.html">
-                <span>
+  <div>
+    <header class="header_section">
+        <nav class="navbar navbar-expand-lg custom_nav-container" style="background-color: #dc3545;">
+            <a class="navbar-brand" href="index.html" style="color: white;">
+                <span style="color: white;">
                     Sparta Market
                 </span>
-              </a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class=""></span>
-              </button>
-      
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav  ">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="{% url "index" %}">Home <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url "products:products" %}">
-                      Shop
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:users' %}">
-                      FOLLOWING
-                    </a>
-                  </li>
-                  {% if request.COOKIES.access %}
-                      {% with request.COOKIES.access as access_token %}
-                        {% if access_token %}
-                          {% comment %} JWT 토큰이 존재하면 인증된 상태로 간주 {% endcomment %}
-                          <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:profile' user_id %}">
-                              MY PAGE
-                            </a>
-                          </li>
-                        {% endif %}
-                      {% endwith %}
-                  {% endif %}
+            </button>
 
-                  
-                  <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact Us</a>
-                  </li>
-                </ul>
-                <div class="user_option">
-                  
-                  {% if request.COOKIES.access %}
-                  {% with request.COOKIES.access as access_token %}
-                    {% if access_token %}
-                      <li class="nav-item">
-                        <form id="logout-form" action="{% url 'users:login' %}" method="POST" style="display: none;">
-                          {% csrf_token %}
-                        </form>
-                
-                        <button class="btn btn-link text-dark" onclick="logout();">
-                          <i class="fa fa-user" aria-hidden="true"></i>
-                          <span>Logout</span>
-                        </button>
-                      </li>
-                
-                      <script>
-                        function logout() {
-                          // fetch API로 DELETE 요청 보내기
-                          fetch("{% url 'users:login' %}", {
-                            method: "DELETE",
-                            headers: {
-                              "X-CSRFToken": document.querySelector('[name="csrfmiddlewaretoken"]').value
-                            }
-                          })
-                          .then(response => {
-                            if (response.ok) {
-                              window.location.href = "{% url 'users:login' %}";  // 로그아웃 후 리디렉션
-                            } else {
-                              alert("로그아웃 실패");
-                            }
-                          })
-                          .catch(error => {
-                            console.error("Error:", error);
-                            alert("로그아웃 중 오류가 발생했습니다.");
-                          });
-                        }
-                      </script>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="background-color: #dc3545;">
+                <ul class="navbar-nav">
+                    <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'index' %}" style="color: white;">Home</a>
+                    </li>
+                    <li class="nav-item {% if request.path == '/products/' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'products:products' %}" style="color: white;">Shop</a>
+                    </li>
+                    <li class="nav-item {% if request.path == '/users/' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'users:users' %}" style="color: white;">Following</a>
+                    </li>
+
+                    {% if request.COOKIES.access %}
+                        {% with request.COOKIES.access as access_token %}
+                            {% if access_token %}
+                                <li class="nav-item {% if request.path == '/users/profile/' %}active{% endif %}">
+                                    <a class="nav-link" href="{% url 'users:profile' %}" style="color: white;">
+                                        MY PAGE
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endwith %}
                     {% endif %}
-                  {% endwith %}
-                  
-                  {% else %}
+                </ul>
 
-                    <a href="{% url 'users:login' %}">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                        <span>
-                        Login
-                        </span>
+                <div class="user_option">
+                    {% if request.COOKIES.access %}
+                        {% with request.COOKIES.access as access_token %}
+                            {% if access_token %}
+                                <li class="nav-item">
+                                    <form id="logout-form" action="{% url 'users:login' %}" method="POST" style="display: none;">
+                                        {% csrf_token %}
+                                    </form>
+
+                                    <button class="btn btn-link text-dark" onclick="logout();">
+                                        <i class="fa fa-user" aria-hidden="true" style="color: white;"></i>
+                                        <span style="color: white;">Logout</span>
+                                    </button>
+                                </li>
+
+                                <script>
+                                    function logout() {
+                                        fetch("{% url 'users:login' %}", {
+                                            method: "DELETE",
+                                            headers: {
+                                                "X-CSRFToken": document.querySelector('[name="csrfmiddlewaretoken"]').value
+                                            }
+                                        })
+                                        .then(response => {
+                                            if (response.ok) {
+                                                window.location.href = "{% url 'users:login' %}";
+                                            } else {
+                                                alert("로그아웃 실패");
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error("Error:", error);
+                                            alert("로그아웃 중 오류가 발생했습니다.");
+                                        });
+                                    }
+                                </script>
+                            {% endif %}
+                        {% endwith %}
+                    {% else %}
+                        <a href="{% url 'users:login' %}">
+                            <i class="fa fa-user" aria-hidden="true" style="color: white;"></i>
+                            <span style="color: white;">Login</span>
+                        </a>
+
+                        <a href="{% url 'users:signup' %}">
+                            <i class="fa-solid fa-right-to-bracket" style="color: white;"></i>
+                            <span style="color: white;">Signup</span>
+                        </a>
+                    {% endif %}
+
+                    <a href="{% url 'products:mycart' %}">
+                        <i class="fa fa-shopping-bag" aria-hidden="true" style="color: white;"></i><span style="color: white;">MY CART</span>
                     </a>
-
-                    <a href="{% url 'users:signup' %}">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        <span>
-                        Signup
-                        </span>
-                    </a>
-
-
-                  {% endif %}
-                 
-
-                  <a href="">
-                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                  </a>
-                  <form class="form-inline ">
-                    <button class="btn nav_search-btn" type="submit">
-                      <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
-                  </form>
+        
                 </div>
-              </div>
-            </nav>
-          </header>
-    </div>
+            </div>
+        </nav>
+    </header>
+</div>
+
     <div>
     {% block content %}
         

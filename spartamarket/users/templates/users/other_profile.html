@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="profile-container text-center">
+    <h1>Other Profile</h1>
+    <hr>
+    <div class="profile-details mb-4">
+        <p>ID: {{ user.username }}</p>
+        <p>NICKNAME: {{ user.nickname }}</p>
+        <p>EMAIL: {{ user.email }}</p>
+        <p>LOCATION: {{ user.location }}</p>
+        <p>CREATED AT: {{ user.create_at }}</p>
+        <p>MODIFIED AT: {{ user.modified_at }}</p>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4 gap-3">
+    </div>
+    
+</div>
+
+{% endblock content %}
+

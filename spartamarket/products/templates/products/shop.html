@@ -1,7 +1,9 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% load humanize %}
 {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/shop.css' %}">
 
 <section class="shop_section layout_padding">
   <div class="container">
@@ -10,42 +12,77 @@
         Latest Products
       </h2>
     </div>
-    <div class="row">
+
+    <!-- 필터 폼 부분 -->
+    <div class="filter-container mb-4">
+      <form method="get" action="{% url 'products:filter' %}">
+        <div class="filter-card">
+          <div class="filter-item">
+            <label for="id_name" class="form-label">Name</label>
+            <input type="text" name="name" id="id_name" class="form-control" value="{{ filter.form.name.value }}">
+          </div>
+          <div class="filter-item">
+            <label for="id_type" class="form-label">Category:</label>
+            <select id="id_type" name="type" class="form-control">
+                <option value="" disabled selected>-- Select a category --</option>
+                <option value="idea">Idea</option>
+                <option value="template">Template</option>
+                <option value="maintenance">Maintenance</option>
+                <option value="develop">Develop</option>
+                <option value="other">Other</option>
+            </select>                    
+            <small class="form-text text-muted">Choose a category that best fits the product.</small>
+        </div>
+          <div class="filter-item">
+            <label for="id_min_price" class="form-label">Min Price</label>
+            <input type="number" name="min_price" id="id_min_price" class="form-control" value="{{ filter.form.min_price.value }}">
+          </div>
+          <div class="filter-item">
+            <label for="id_max_price" class="form-label">Max Price</label>
+            <input type="number" name="max_price" id="id_max_price" class="form-control" value="{{ filter.form.max_price.value }}">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-danger filter-btn">Apply Filters</button>
+      </form>
+    </div>
+  
+    <!-- 제품 카드 표시 -->
+    <div class="row mt-4">
       {% for product in products %}
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="box">
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+          <div class="card border-0 shadow-sm rounded d-flex flex-column" style="height: 100%;">
+            <!-- 제품 상세 페이지 링크 -->
             <a href="{% url 'products:detail' product.id %}">
-
-                {% if product.image %}
-                  <div class="img-box">
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+              {% if product.image %}
+                <div class="img-box">
+                  <img src="{{ product.image }}" alt="{{ product.name }}" class="card-img-top rounded">
                 </div>
-                {% endif %}
-                
-              <div class="detail-box">
-                <h6>{{ product.name }}</h6>
-              </div>
-
-              <div class="detail-box">
-                <h6>Type <span>{{ product.type }}</span></h6>
-              </div>
-
-              <div class="detail-box">
-                <h6>Price <span>₩{{ product.price| intcomma }}</span></h6>
+              {% else %}
+                <div class="img-box">
+                  <img src="https://spartamarketbucket.s3.ap-northeast-2.amazonaws.com/default-image.png" class="card-img-top rounded">
+                </div>
+              {% endif %}
+              <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">
+                  <small class="text-muted">Type: {{ product.type }}</small>
+                </p>
+                <p class="card-text">
+                  <strong>₩{{ product.price }}</strong>
+                </p>
               </div>
             </a>
           </div>
         </div>
       {% endfor %}
     </div>
-    <div class="btn-box">
-      <a href="{% url 'products:create' %}">
-        Add Sparta Products
+
+    <div class="btn-box text-end mb-4">
+      <a href="{% url 'products:create' %}" style="background-color: #dc3545;">
+        <i class="fa fa-pencil-alt me-2"></i> Add Sparta Products
       </a>
     </div>
   </div>
 </section>
 
 {% endblock content %}
-
-   

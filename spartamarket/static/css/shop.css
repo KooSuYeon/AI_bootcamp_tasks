@@ -1,0 +1,57 @@
+/* 필터 카드 디자인 */
+.filter-container {
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+  }
+  
+  .filter-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  
+  .filter-item {
+    width: 45%;
+  }
+  
+  .filter-item label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .filter-item select, 
+  .filter-item input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+  }
+  
+  .filter-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border-radius: 25px;
+    background-color: #0a39c6;
+    color: #fff;
+    border: none;
+    display: block;
+    width: 100%;
+  }
+  
+  .filter-btn:hover {
+    background-color: #c82333;
+  }
+  
+  /* 필터 카드를 화면 크기에 맞게 스타일링 */
+  @media (max-width: 767px) {
+    .filter-item {
+      width: 100%;
+    }
+  }
+  

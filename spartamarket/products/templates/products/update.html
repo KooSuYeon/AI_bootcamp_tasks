@@ -9,26 +9,27 @@
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
             <!-- Back to Products link -->
-            <a href="{% url 'products:products' %}">
+            <a href="{% url 'products:detail' product.id%}">
                 <i class="fa-sharp fa-solid fa-arrow-left"></i>
-                <span>Back to Products</span>
+                <span>Back to Product</span>
             </a>
             <br><br>
 
-            <!-- Form -->
-            <form action="{% url 'products:create' %}" method="POST" enctype="multipart/form-data" class="createform-container border p-4 rounded">
+             <!-- Form -->
+             <form action="{% url 'products:update' product.id %}" method="POST" enctype="multipart/form-data" class="createform-container border p-4 rounded">
                 {% csrf_token %}
-
+                
+                <input type="hidden" name="_method" value="PUT"> 
                 <!-- Product Name -->
                 <div class="form-group mb-3">
                     <label for="id_name" class="form-label">Title:</label>
-                    <input type="text" id="id_name" name="name" class="form-control" placeholder="Enter product title" required>
+                    <input type="text" id="id_name" name="name" class="form-control" placeholder="Enter product title" value="{{ product.name }}" required>
                 </div>
 
                 <!-- Description -->
                 <div class="form-group mb-3">
                     <label for="id_description" class="form-label">Description:</label>
-                    <textarea id="id_description" name="description" class="form-control" rows="4" placeholder="Enter product description" required></textarea>
+                    <textarea id="id_description" name="description" class="form-control" rows="4" placeholder="Enter product description" required>{{ product.description }}</textarea>
                 </div>
 
                 <!-- Category -->
@@ -36,25 +37,24 @@
                     <label for="id_type" class="form-label">Category:</label>
                     <select id="id_type" name="type" class="form-control" required>
                         <option value="" disabled selected>-- Select a category --</option>
-                        <option value="idea">Idea</option>
-                        <option value="template">Template</option>
-                        <option value="maintenance">Maintenance</option>
-                        <option value="develop">Develop</option>
-                        <option value="other">Other</option>
+                        <option value="idea" {% if product.type == 'idea' %} selected {% endif %}>Idea</option>
+                        <option value="template" {% if product.type == 'template' %} selected {% endif %}>Template</option>
+                        <option value="maintenance" {% if product.type == 'maintenance' %} selected {% endif %}>Maintenance</option>
+                        <option value="develop" {% if product.type == 'develop' %} selected {% endif %}>Develop</option>
+                        <option value="other" {% if product.type == 'other' %} selected {% endif %}>Other</option>
                     </select>                    
                     <small class="form-text text-muted">Choose a category that best fits the product.</small>
                 </div>
-                
 
                 <!-- Price -->
                 <div class="form-group mb-3">
                     <label for="id_price" class="form-label">Price:</label>
-                    <input type="text" id="id_price" name="price" class="form-control" oninput="formatPrice(this)" placeholder="Enter price" required>
+                    <input type="text" id="id_price" name="price" class="form-control" oninput="formatPrice(this)" placeholder="Enter price" value="{{ product.price }}" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="id_count" class="form-label">Quantity:</label>
-                    <input type="number" id="id_count" name="count" class="form-control" min="1" max="30" placeholder="Enter product quantity (1 to 30)" required>
+                    <input type="number" id="id_count" name="count" class="form-control" min="1" max="30" placeholder="Enter product quantity (1 to 30)" value="{{ product.count }}"required>
                     <small class="form-text text-muted">Quantity must be between 1 and 30.</small>
                 </div>
 
@@ -69,7 +69,7 @@
                 <div class="row justify-content-center mt-4">
                     <button type="submit" class="btn btn-danger custom-button">
                         <i class="fa-solid fa-plus fa-lg me-2"></i>
-                        Register Product
+                        Update Product
                     </button>
                 </div>
             </form>

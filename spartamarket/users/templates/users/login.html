@@ -11,7 +11,7 @@
             <div class="col-md-6 mx-auto">
                 <div class="form_container">
                     <!-- Form 시작 -->
-                    <form action="" method="POST">
+                    <form action="{% url 'users:login' %}" method="POST">
                         {% csrf_token %}
                         
                         <!-- 전체 폼 에러 -->
@@ -59,10 +59,16 @@
                             {% endif %}
                         </div>
                         
+                        {% if error %}
+                        <div class="alert alert-danger">
+                            {{ error }}
+                        </div>
+                        {% endif %}
+
 
                         <!-- Submit 버튼 -->
                         <div class="btn_box">
-                            <button type="submit" class="btn btn-primary w-100">
+                            <button type="submit" class="btn btn-primary w-100" style="background-color: #dc3545;">
                                 LOGIN
                             </button>
                         </div>

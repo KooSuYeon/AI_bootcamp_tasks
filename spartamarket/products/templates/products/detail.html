@@ -1,51 +1,132 @@
 {% extends "base.html" %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/detailform.css' %}">
 
 {% block content %}
-
-<section class="product_detail_section layout_padding">
-  <div class="container">
-    <div class="heading_container heading_center">
-      <h2>{{ product.name }}</h2>
-      <div class="divider"></div>
-      {% if user.is_authenticated and user == product.author %}
-        <div class="action-bar mt-3 mb-4">
-          {% comment %} <a href="{% url 'products:update' product.id %}" class="btn btn-warning me-2">Edit</a> {% endcomment %}
-          <form action="{% url 'products:delete' product.id %}" method="POST" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Delete</button>
-          </form>
+<div class="container mt-5">
+    <!-- Back to Products link -->
+    <a href="{% url 'products:products' %}">
+      <i class="fa-sharp fa-solid fa-arrow-left"></i>
+      <span>Back to Products</span>
+    </a>
+    
+    <div class="product-detail-container mt-4 p-4 rounded shadow-sm">
+        <!-- Product Title -->
+        <div class="heading_container heading_center mb-4">
+            <h2>{{ product.name }}</h2>
+            <div class="divider"></div>
+            <div class="action-buttons mt-4">
+              <!-- Like/Unlike 버튼 -->
+              <form action="{% url 'products:like' product.id %}" method="POST" class="d-inline">
+                  {% csrf_token %}
+                  {% if is_liked %}
+                      <button type="submit" class="btn btn-outline-danger custom-button">
+                          <i class="fa-solid fa-heart me-2"></i> 좋아요 취소
+                      </button>
+                  {% else %}
+                      <button type="submit" class="btn btn-outline-primary custom-button">
+                          <i class="fa-regular fa-heart me-2"></i> 좋아요
+                      </button>
+                  {% endif %}
+              </form>
+          </div>
+          
         </div>
-      {% endif %}
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        {% if product.image %}
-            <div class="img-box">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
-            </div>
-        {% endif %}
-      </div>
-      <div class="col-md-6">
-        <div class="detail-box">
-          <h4>Description</h4>
-          <p>{{ product.description }}</p>
-          <h4>Category</h4>
-          <p>{{ product.get_type_display }}</p>
-          <h4>Price</h4>
-          <p>${{ product.price }}</p>
-          {% if product.type == 'new' %}
-            <div class="badge new-badge">
-              <span>New</span>
-            </div>
-          {% endif %}
-          <a href="#" class="btn btn-primary mt-3">Add to Cart</a>
-        </div>
-      </div>
-    </div>
-    <div class="back-link mt-5">
-      <a href="{% url 'products:products' %}" class="btn btn-secondary">Back to Products</a>
-    </div>
-  </div>
-</section>
 
+        <!-- Product Details -->
+        <div class="row">
+            <!-- Product Image -->
+            <div class="col-md-6 mb-3">
+                <div class="img-box">
+                    {% if product.image %}
+                        <img src="{{ product.image }}" alt="{{ product.name }}" class="img-fluid rounded">
+                    {% else %}
+                        <img src="https://spartamarketbucket.s3.ap-northeast-2.amazonaws.com/default-image.png" alt="Default Image" class="img-fluid rounded">
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Product Information -->
+            <div class="col-md-6 mb-3">
+                <div class="detail-box">
+                    <h4>Description</h4>
+                    <p>{{ product.description }}</p>
+                    
+                    <h4>Category</h4>
+                    <div class="category-btn">{{ product.get_type_display }}</div>
+                    
+                    <h4>Price</h4>
+                    <div class="price-btn">₩{{ product.price }}</div>
+
+                    <h4>Quantity</h4>
+                    <div class="price-btn">{{ product.count }} 명</div>
+                    
+                    {% if product.type == 'new' %}
+                        <div class="badge new-badge mb-3">
+                            <span>New</span>
+                        </div>
+                    {% endif %}
+
+                    <div class="action-buttons">
+                      <form action="{% url 'products:save' product.id %}" method="POST" class="d-inline">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-primary custom-button me-3">
+                              <i class="fa-solid fa-cart-plus me-2"></i>Add to Cart
+                          </button>
+                      </form>
+                  </div>
+                  
+
+                    
+                    {% if user == product.author %}
+                    <div class="action-buttons">
+                      <a href="{% url 'products:update' product.id %}" class="btn btn-outline-danger me-3"> 
+                        <i class="fa fa-pencil-alt"></i> EDIT
+                      </a>
+                  </div>
+                  {% endif %}
+
+                  <!-- Modal for confirmation (Moved to the top of the page) -->
+                  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <br><br>
+                          
+                          Are you sure you want to delete this product? <br>
+                          This action cannot be undone.
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <form id="deleteForm" action="{% url 'products:delete' product.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                    <!-- Page content (Everything else) -->
+                    {% if user == product.author %}
+                      <div class="action-buttons">
+                        <!-- Trigger Modal -->
+                        <a href="#" class="btn btn-outline-danger me-3" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                          <i class="fa-solid fa-trash"></i> DELETE
+                        </a>
+                      </div>
+                    {% endif %}
+
+                          
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
