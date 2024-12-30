@@ -16,6 +16,7 @@ from django.http import HttpResponseBadRequest, HttpResponseNotAllowed, JsonResp
 from django_filters.views import FilterView
 from dotenv import load_dotenv
 import os
+from django.core.cache import cache
 
 # .env 파일 로드
 load_dotenv()
@@ -140,6 +141,18 @@ class ProductDetailView(APIView):
 
         is_liked = product.like_users.filter(id=user.id).exists()
 
+        # 로그인한 사용자이고 작성자가 아닌 경우에만 조회수 증가 처리
+        # 24시간 동안 같은 IP에서 같은 게시글 조회 시 조회수가 증가하지 않음
+        if user != product.author:
+            # 해당 사용자의 IP와 게시글 ID로 캐시 키를 생성
+            cache_key = f"view_count_{request.META.get('REMOTE_ADDR')}_{product_id}"
+            
+            # 캐시에 없는 경우에만 조회수 증가
+            if not cache.get(cache_key):
+                product.view_count += 1
+                product.save()
+                # 캐시 저장 (24시간 유효)
+                cache.set(cache_key, True, 86400)
         context = {
             "product": product,
             "user": user,

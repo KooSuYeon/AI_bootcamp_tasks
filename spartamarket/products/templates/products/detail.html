@@ -62,6 +62,9 @@
                     <h4>Quantity</h4>
                     <div class="price-btn">{{ product.count }} 명</div>
                     
+                    <h4>View Count</h4>
+                    <i class="fa-regular fa-eye"></i> {{ product.view_count }} 
+
                     {% if product.type == 'new' %}
                         <div class="badge new-badge mb-3">
                             <span>New</span>

@@ -31,12 +31,12 @@
 
 ![alt text](gif/follow.gif)
 
+> 조회수
 
-
-
+![alt text](gif/view_count.gif)
 
 ## ERD
-![alt text](gif/spartamarket.erd.png)
+![alt text](gif/erd.png)
 
 ## Software Architecture
 ![alt text](gif/spartamarket_flow.drawio.png)
