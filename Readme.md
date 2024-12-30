@@ -38,6 +38,8 @@
 ## ERD
 ![alt text](gif/spartamarket.erd.png)
 
+## Software Architecture
+![alt text](gif/spartamarket_flow.drawio.png)
 ---
 ## 📣 How To Use
 
